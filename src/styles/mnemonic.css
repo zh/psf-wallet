@@ -1,0 +1,126 @@
+.mnemonic-container {
+  margin: 16px 0;
+}
+
+.mnemonic-container h2 {
+  font-size: 18px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.87);
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.mnemonic-input-wrapper {
+  margin-bottom: 12px;
+}
+
+.mnemonic-input {
+  width: 100%;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.4;
+  padding: 12px 16px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid #444;
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.87);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mnemonic-input:focus {
+  outline: none;
+  border-color: #646cff;
+  box-shadow: 0 0 0 2px rgba(100, 108, 255, 0.2);
+}
+
+.mnemonic-input:disabled {
+  background: rgba(0, 0, 0, 0.1);
+  color: rgba(255, 255, 255, 0.3);
+  border-color: #333;
+}
+
+.mnemonic-generate-button {
+  background: #646cff;
+  min-width: 100px;
+}
+
+.mnemonic-generate-button:hover {
+  background: #535bf2;
+}
+
+.mnemonic-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.mnemonic-save-button,
+.mnemonic-reset-button,
+.mnemonic-generate-button {
+  background: #646cff;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  min-width: 80px;
+}
+
+.mnemonic-save-button {
+  background: #4caf50;
+}
+
+.mnemonic-save-button:hover {
+  background: #45a049;
+}
+
+.mnemonic-reset-button {
+  background: #f44336;
+}
+
+.mnemonic-reset-button:hover {
+  background: #da190b;
+}
+
+.mnemonic-generate-button:hover {
+  background: #535bf2;
+}
+
+.mnemonic-save-button:disabled,
+.mnemonic-reset-button:disabled,
+.mnemonic-generate-button:disabled {
+  background: #555;
+  cursor: not-allowed;
+}
+
+/* Mobile responsive layout */
+@media (max-width: 600px) {
+  .mnemonic-actions {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .mnemonic-save-button,
+  .mnemonic-reset-button,
+  .mnemonic-generate-button {
+    width: 100%;
+    max-width: 200px;
+  }
+}
+
+.security-notice {
+  background: #fff3cd;
+  border: 1px solid #ffeaa7;
+  color: #856404;
+  padding: 12px;
+  border-radius: 4px;
+  margin: 12px 0;
+  font-size: 13px;
+  line-height: 1.4;
+}

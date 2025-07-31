@@ -1,0 +1,61 @@
+/* Additional app-specific styles */
+.app-container {
+  min-height: 100vh;
+  background-color: #000;
+  color: #fff;
+}
+
+/* Loading states */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  color: #888;
+}
+
+.loading::after {
+  content: '';
+  width: 20px;
+  height: 20px;
+  border: 2px solid #333;
+  border-top: 2px solid #646cff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-left: 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Error states */
+.error {
+  color: #ff6b6b;
+  padding: 12px;
+  background: #2d1b1b;
+  border: 1px solid #ff6b6b;
+  border-radius: 4px;
+  margin: 16px 0;
+}
+
+/* Success states */
+.success {
+  color: #51cf66;
+  padding: 12px;
+  background: #1b2d1b;
+  border: 1px solid #51cf66;
+  border-radius: 4px;
+  margin: 16px 0;
+}
+
+/* Info states */
+.info {
+  color: #74c0fc;
+  padding: 12px;
+  background: #1b1d2d;
+  border: 1px solid #74c0fc;
+  border-radius: 4px;
+  margin: 16px 0;
+}

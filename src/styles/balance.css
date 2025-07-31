@@ -1,0 +1,166 @@
+.balance-container {
+  text-align: center;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid #333;
+  border-radius: 8px;
+  margin: 16px 0;
+}
+
+.balance-display {
+  text-align: center;
+  padding: 16px;
+}
+
+.balance-error {
+  color: #f44336;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.balance-main {
+  margin-bottom: 8px;
+}
+
+.balance-amount {
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.balance-secondary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #888;
+  flex-wrap: wrap;
+}
+
+.balance-sats,
+.balance-usd {
+  color: #888;
+}
+
+.balance-separator {
+  color: #666;
+}
+
+/* Legacy classes for backward compatibility */
+.balance {
+  margin: 8px 0;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.87);
+  line-height: 1.5;
+}
+
+.balance strong {
+  color: #646cff;
+  font-weight: 600;
+}
+
+.balance-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.balance-refresh-button {
+  background: #646cff;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  padding: 8px 16px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.balance-refresh-button:hover {
+  background: #5a5bcc;
+}
+
+.balance-refresh-button:disabled {
+  background: #555;
+  cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  .balance-amount {
+    font-size: 24px;
+  }
+  
+  .balance-secondary {
+    font-size: 13px;
+    gap: 6px;
+  }
+  
+  .balance-refresh-button {
+    font-size: 11px;
+    padding: 6px 12px;
+  }
+}
+
+/* Address display component styles */
+.address-display {
+  text-align: center;
+  margin: 16px 0;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid #333;
+  border-radius: 8px;
+}
+
+.address-label {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 6px;
+}
+
+.address-value {
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.87);
+  padding: 4px 8px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  position: relative;
+  display: inline-block;
+}
+
+.address-value.clickable {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.address-value.clickable:hover {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.copy-indicator {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #4caf50;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: sans-serif;
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .address-display {
+    margin: 12px 0;
+    padding: 10px;
+  }
+  
+  .address-value {
+    font-size: 13px;
+  }
+}

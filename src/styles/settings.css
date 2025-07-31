@@ -1,0 +1,189 @@
+.settings-content {
+  padding: 16px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.server-section,
+.settings-section {
+  margin-bottom: 24px;
+}
+
+.server-section h2,
+.settings-section h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.87);
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.server-select {
+  width: 100%;
+  padding: 12px 16px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid #444;
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.87);
+  font-size: 14px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.server-select:focus {
+  outline: none;
+  border-color: #646cff;
+  box-shadow: 0 0 0 2px rgba(100, 108, 255, 0.2);
+}
+
+.server-select:disabled {
+  background: rgba(0, 0, 0, 0.1);
+  color: rgba(255, 255, 255, 0.3);
+  border-color: #333;
+  cursor: not-allowed;
+}
+
+.server-note {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 8px;
+  text-align: center;
+  font-style: italic;
+}
+
+.setting-item {
+  margin-bottom: 20px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid #333;
+  border-radius: 8px;
+}
+
+.setting-label {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.87);
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+
+.setting-checkbox {
+  margin-right: 12px;
+  width: 18px;
+  height: 18px;
+  accent-color: #646cff;
+}
+
+.setting-description {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.setting-slider {
+  width: 100%;
+  margin: 8px 0;
+  height: 6px;
+  border-radius: 3px;
+  background: #333;
+  outline: none;
+  accent-color: #646cff;
+}
+
+.cache-button {
+  background: #646cff;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-bottom: 8px;
+}
+
+.cache-button:hover {
+  background: #5a5bcc;
+}
+
+.cache-button:active {
+  background: #4a4baa;
+}
+
+.cache-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.87);
+  margin-bottom: 12px;
+}
+
+.cache-stats {
+  margin-bottom: 16px;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.cache-stat-item {
+  margin-bottom: 6px;
+  color: rgba(255, 255, 255, 0.87);
+}
+
+.cache-stat-item strong {
+  color: #fff;
+}
+
+.cache-description {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 8px 0;
+  font-style: italic;
+}
+
+.refresh-stats-button {
+  background: #646cff;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.refresh-stats-button:hover {
+  background: #5a5bcc;
+}
+
+.cache-clear-button {
+  background: #f44336;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  width: 100%;
+}
+
+.cache-clear-button:hover {
+  background: #da190b;
+}
+
+.cache-clear-button:disabled {
+  background: #555;
+  cursor: not-allowed;
+  color: #888;
+}
+
+.cache-clear-button:active {
+  background: #c62828;
+}

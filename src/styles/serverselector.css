@@ -1,0 +1,149 @@
+.serverselector-container {
+  margin: 16px 0;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid #333;
+  border-radius: 8px;
+}
+
+.server-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.server-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  margin-bottom: 8px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid #444;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.server-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.server-info {
+  flex: 1;
+  margin-right: 12px;
+}
+
+.server-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.87);
+  margin-bottom: 4px;
+}
+
+.server-url {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: 'Courier New', monospace;
+}
+
+.server-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 12px;
+}
+
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #888;
+}
+
+.status-indicator.online {
+  background: #4caf50;
+}
+
+.status-indicator.offline {
+  background: #f44336;
+}
+
+.status-indicator.testing {
+  background: #ff9800;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.select-button {
+  padding: 8px 16px;
+  background: #646cff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  min-width: 80px;
+  transition: background-color 0.2s ease;
+}
+
+.select-button:hover {
+  background: #535bf2;
+}
+
+.select-button.selected {
+  background: #4caf50;
+  cursor: default;
+}
+
+.select-button:disabled {
+  background: #444;
+  color: #888;
+  cursor: not-allowed;
+}
+
+.add-server-form {
+  margin-top: 16px;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid #444;
+  border-radius: 6px;
+}
+
+.server-input {
+  width: 100%;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid #444;
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.87);
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.server-input:focus {
+  outline: none;
+  border-color: #646cff;
+  box-shadow: 0 0 0 2px rgba(100, 108, 255, 0.2);
+}
+
+.add-server-button {
+  background: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.add-server-button:hover {
+  background: #45a049;
+}
+

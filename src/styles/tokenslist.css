@@ -1,0 +1,48 @@
+.tokens-list-wrapper {
+  padding: 16px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.token-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 100%;
+}
+
+.loading-message,
+.error-message {
+  text-align: center;
+  padding: 20px;
+  color: rgba(255, 255, 255, 0.87);
+  font-size: 14px;
+}
+
+.error-message {
+  color: #f44336;
+}
+
+.no-tokens {
+  margin-top: 20px;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  font-size: 14px;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid #333;
+  border-radius: 8px;
+}
+
+.no-tokens-subtitle {
+  font-size: 12px;
+  margin-top: 8px;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.zoomed-token-wrapper {
+  padding: 16px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+

@@ -1,0 +1,56 @@
+.receive-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.receive-section {
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.receive-section h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.87);
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.not-connected {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  text-align: center;
+}
+
+.not-connected p {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+}
+
+/* Override Address component QR styling for receive page */
+.receive-section .address-container {
+  margin: 0;
+}
+
+.receive-section .qr-code-container {
+  margin-bottom: 20px;
+}
+
+@media (max-width: 600px) {
+  .receive-section h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .receive-content {
+    padding: 12px;
+  }
+}
