@@ -29,7 +29,7 @@ const Mnemonic = ({ showSave = true, showGenerate = true }) => {
   const handleSave = () => {
     try {
       const sanitized = sanitizeInput(mnemonic, 'mnemonic');
-      
+
       if (!sanitized) {
         setNotification({ type: 'error', message: 'Mnemonic cannot be empty.' });
         return;
@@ -46,14 +46,14 @@ const Mnemonic = ({ showSave = true, showGenerate = true }) => {
       }
 
       localStorage.setItem('mnemonic', sanitized);
-      setNotification({ 
-        type: 'success', 
+      setNotification({
+        type: 'success',
         message: 'Mnemonic saved successfully.'
       });
     } catch {
-      setNotification({ 
-        type: 'error', 
-        message: 'Failed to save mnemonic. Please try again.' 
+      setNotification({
+        type: 'error',
+        message: 'Failed to save mnemonic. Please try again.'
       });
     }
   };
@@ -70,7 +70,7 @@ const Mnemonic = ({ showSave = true, showGenerate = true }) => {
   return (
     <div className="mnemonic-container">
       <h2>Mnemonic</h2>
-        
+
         {/* Security Warning */}
         <div className="security-warning" style={{
           background: '#fff3cd',
@@ -81,8 +81,7 @@ const Mnemonic = ({ showSave = true, showGenerate = true }) => {
           fontSize: '0.9em',
           color: '#856404'
         }}>
-          ⚠️ <strong>Security Notice:</strong> Your mnemonic is stored in plain text in browser localStorage. 
-          For production use, consider implementing proper encryption. Never share your mnemonic with anyone.
+          ⚠️ <strong>Security Notice:</strong> Never share your mnemonic with anyone.
         </div>
       <div className="mnemonic-input-wrapper">
         <input
@@ -113,7 +112,7 @@ const Mnemonic = ({ showSave = true, showGenerate = true }) => {
             </button>
           </>
         )}
-        {showGenerate && (
+        {showGenerate && !mnemonic.trim() && (
           <button
             onClick={handleGenerate}
             className="mnemonic-generate-button"

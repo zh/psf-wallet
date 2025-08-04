@@ -1,7 +1,9 @@
+/* Use unified container styling from common.css */
 .sendbch-container {
-  padding: 16px;
   max-width: 600px;
   margin: 0 auto;
+  padding: 16px;
+  box-sizing: border-box;
 }
 
 .sendbch-container h2 {
@@ -12,56 +14,12 @@
   text-align: center;
 }
 
+/* Form styles now inherit from common.css */
 .send-group {
   display: flex;
   flex-direction: column;
   margin-bottom: 16px;
   gap: 8px;
-}
-
-.form-input-group {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-.form-input {
-  flex: 1;
-  padding: 12px;
-  background: rgba(0, 0, 0, 0.3);
-  border: 1px solid #444;
-  border-radius: 6px;
-  color: rgba(255, 255, 255, 0.87);
-  font-size: 14px;
-}
-
-.form-input:focus {
-  outline: none;
-  border-color: #646cff;
-  box-shadow: 0 0 0 2px rgba(100, 108, 255, 0.2);
-}
-
-.scan-button {
-  background: #646cff;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  padding: 12px 16px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  min-width: 60px;
-}
-
-.scan-button:hover {
-  background: #535bf2;
-}
-
-.scan-button:disabled {
-  background: #444;
-  color: #888;
-  cursor: not-allowed;
 }
 
 .unit-select {
@@ -151,4 +109,12 @@
 
 .close-scanner-button:hover {
   background: #ff5252;
+}
+
+/* Override tools.css media query to prevent scan button width from changing */
+@media (max-width: 600px) {
+  .sendbch-container .scan-button {
+    width: auto;
+    min-width: 60px;
+  }
 }

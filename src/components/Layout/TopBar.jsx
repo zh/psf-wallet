@@ -1,15 +1,34 @@
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useAtom } from 'jotai';
+import { manualBalanceRefreshAtom, walletConnectedAtom } from '../../atoms';
+import { useBalance } from '../../hooks';
 import NetworkStatus from '../NetworkStatus';
 
 const TopBar = ({ title }) => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [, refreshBalance] = useAtom(manualBalanceRefreshAtom);
+  const [walletConnected] = useAtom(walletConnectedAtom);
+  const { loading } = useBalance();
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
-  const showBackButton = location.pathname !== '/';
+  const isHomePage = location.pathname === '/';
+  const showBackButton = !isHomePage;
+  const showRefreshLink = isHomePage && walletConnected;
 
   const handleBackClick = () => {
     navigate(-1);
+  };
+
+  const handleRefreshClick = async () => {
+    setIsRefreshing(true);
+    refreshBalance();
+    // Reset refreshing state after a short delay
+    setTimeout(() => {
+      setIsRefreshing(false);
+    }, 1000);
   };
 
   return (
@@ -22,6 +41,16 @@ const TopBar = ({ title }) => {
             aria-label="Go back"
           >
             Back
+          </button>
+        )}
+        {showRefreshLink && (
+          <button
+            onClick={handleRefreshClick}
+            className="back-button"
+            aria-label="Refresh balance"
+            disabled={loading || isRefreshing}
+          >
+            {loading || isRefreshing ? 'Refreshing...' : 'Refresh'}
           </button>
         )}
         <h1 className="page-title">{title}</h1>

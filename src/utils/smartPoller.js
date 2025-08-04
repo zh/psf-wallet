@@ -24,20 +24,20 @@ export class SmartPoller {
   constructor(pollFunction, config = {}) {
     this.pollFunction = pollFunction;
     this.config = { ...DEFAULT_CONFIG, ...config };
-    
+
     this.isRunning = false;
     this.currentInterval = this.config.baseInterval;
     this.consecutiveFailures = 0;
     this.timeoutId = null;
     this.lastPollTime = 0;
-    
+
     // Bind methods
     this.start = this.start.bind(this);
     this.stop = this.stop.bind(this);
     this.poll = this.poll.bind(this);
     this.handleVisibilityChange = this.handleVisibilityChange.bind(this);
     this.handleOnlineChange = this.handleOnlineChange.bind(this);
-    
+
     // Set up event listeners if in browser environment
     if (typeof window !== 'undefined') {
       this.setupEventListeners();
@@ -51,7 +51,7 @@ export class SmartPoller {
     if (this.config.visibilityPause) {
       document.addEventListener('visibilitychange', this.handleVisibilityChange);
     }
-    
+
     if (this.config.networkPause) {
       window.addEventListener('online', this.handleOnlineChange);
       window.addEventListener('offline', this.handleOnlineChange);
@@ -98,11 +98,11 @@ export class SmartPoller {
     if (this.config.visibilityPause && document.hidden) {
       return true;
     }
-    
+
     if (this.config.networkPause && !navigator.onLine) {
       return true;
     }
-    
+
     return false;
   }
 
@@ -113,7 +113,7 @@ export class SmartPoller {
     if (this.isRunning) {
       return;
     }
-    
+
     this.isRunning = true;
     this.consecutiveFailures = 0;
     this.currentInterval = this.config.baseInterval;
@@ -176,22 +176,22 @@ export class SmartPoller {
 
     try {
       await this.pollFunction();
-      
+
       // Success: reset failure count and interval
       this.consecutiveFailures = 0;
       this.currentInterval = this.config.baseInterval;
-      
+
     } catch (error) {
       // Failure: increment counter and apply backoff
       this.consecutiveFailures++;
-      
+
       if (this.consecutiveFailures >= this.config.maxRetries) {
         this.applyBackoff();
       }
-      
+
       // Log error securely (avoid logging sensitive data)
       if (import.meta?.env?.DEV) {
-        console.warn(`Smart poller failed (attempt ${this.consecutiveFailures}):`, 
+        console.warn(`Smart poller failed (attempt ${this.consecutiveFailures}):`,
           error.message || 'Unknown error');
       }
     }
@@ -207,7 +207,7 @@ export class SmartPoller {
       this.currentInterval * this.config.backoffMultiplier,
       this.config.maxInterval
     );
-    
+
     if (import.meta?.env?.DEV) {
       console.info(`Smart poller backing off to ${this.currentInterval}ms interval`);
     }
@@ -247,7 +247,7 @@ export class SmartPoller {
    */
   updateConfig(newConfig) {
     this.config = { ...this.config, ...newConfig };
-    
+
     // Reset interval if it exceeds new maximum
     if (this.currentInterval > this.config.maxInterval) {
       this.currentInterval = this.config.maxInterval;
@@ -284,19 +284,19 @@ export const useSmartPoller = () => {
  */
 export const createBatchedPoller = (pollFunctions, config = {}) => {
   const { batchDelay = 100, maxBatchSize = 10 } = config;
-  
+
   return async () => {
     const batch = pollFunctions.slice(0, maxBatchSize);
-    
+
     // Execute all polls in parallel with a small delay between batches
     const results = await Promise.allSettled(
-      batch.map((pollFn, index) => 
-        new Promise(resolve => 
+      batch.map((pollFn, index) =>
+        new Promise(resolve =>
           setTimeout(() => resolve(pollFn()), index * batchDelay)
         )
       )
     );
-    
+
     // Log any failures in development
     if (import.meta?.env?.DEV) {
       const failures = results.filter(result => result.status === 'rejected');
@@ -304,7 +304,7 @@ export const createBatchedPoller = (pollFunctions, config = {}) => {
         console.warn(`Batch poller: ${failures.length} operations failed`);
       }
     }
-    
+
     return results;
   };
 };
@@ -323,16 +323,16 @@ export const createAdaptivePoller = (pollFunction, dataComparator, config = {}) 
     slowInterval: config.slowInterval || 60000,   // Slow polling when data is stable
     stabilityThreshold: config.stabilityThreshold || 3 // Polls without change before slowing
   };
-  
+
   let unchangedPolls = 0;
   let lastData = null;
-  
+
   const adaptivePollFunction = async () => {
     const result = await pollFunction();
-    
+
     if (dataComparator && lastData !== null) {
       const hasChanged = !dataComparator(lastData, result);
-      
+
       if (hasChanged) {
         unchangedPolls = 0;
         adaptiveConfig.baseInterval = adaptiveConfig.fastInterval;
@@ -343,11 +343,11 @@ export const createAdaptivePoller = (pollFunction, dataComparator, config = {}) 
         }
       }
     }
-    
+
     lastData = result;
     return result;
   };
-  
+
   return new SmartPoller(adaptivePollFunction, adaptiveConfig);
 };
 

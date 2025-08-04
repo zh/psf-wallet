@@ -24,19 +24,19 @@ const ToolsPage = () => {
     try {
       // Update the options first
       setOptions((prevOptions) => ({ ...prevOptions, restURL: url }));
-      
+
       // If wallet is connected, update its server endpoint without disconnecting
       if (walletConnected && wallet) {
         // Update the wallet's REST URL directly
         if (wallet.bchjs && wallet.bchjs.restURL) {
           wallet.bchjs.restURL = url;
         }
-        
+
         // If the wallet has an options property, update it
         if (wallet.options) {
           wallet.options.restURL = url;
         }
-        
+
         console.log('Server switched successfully! Wallet remains connected.');
       }
     } catch (error) {
@@ -150,8 +150,8 @@ const ToolsPage = () => {
                 </button>
               </div>
             )}
-            <button 
-              onClick={handleClearCache} 
+            <button
+              onClick={handleClearCache}
               className="cache-clear-button"
               disabled={cacheStats && cacheStats.itemCount === 0}
             >

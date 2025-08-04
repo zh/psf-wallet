@@ -20,19 +20,19 @@ const SettingsPage = () => {
     try {
       // Update the options first
       setOptions((prevOptions) => ({ ...prevOptions, restURL: url }));
-      
+
       // If wallet is connected, update its server endpoint without disconnecting
       if (walletConnected && wallet) {
         // Update the wallet's REST URL directly
         if (wallet.bchjs && wallet.bchjs.restURL) {
           wallet.bchjs.restURL = url;
         }
-        
+
         // If the wallet has an options property, update it
         if (wallet.options) {
           wallet.options.restURL = url;
         }
-        
+
         console.log('Server switched successfully! Wallet remains connected.');
       }
     } catch (error) {
@@ -101,7 +101,7 @@ const SettingsPage = () => {
 
         <div className="settings-section">
           <h2>Performance Settings</h2>
-          
+
 
           <div className="setting-item">
             <h3 className="cache-title">Cache Management</h3>
@@ -125,8 +125,8 @@ const SettingsPage = () => {
               </div>
             )}
 
-            <button 
-              onClick={handleClearCache} 
+            <button
+              onClick={handleClearCache}
               className="cache-clear-button"
               disabled={cacheStats && cacheStats.itemCount === 0}
             >

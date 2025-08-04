@@ -28,10 +28,10 @@ const SendTokens = ({ token, onAllTokensSent }) => {
     if (Array.isArray(scannedData) && scannedData.length > 0) {
       // Extract the first item's rawValue (the actual address)
       const address = scannedData[0].rawValue;
-      console.log('address: ', address);
+      // Valid address scanned
       setRecipient(address); // Set the address in the state
     } else {
-      console.error('Invalid scanned data:', scannedData);
+      // Invalid scanned data format
     }
     setShowScanner(false);
   };
@@ -65,7 +65,7 @@ const SendTokens = ({ token, onAllTokensSent }) => {
       if (amount > token.qty) {
         throw new Error('Trying to send more then MAX.');
       }
-      console.log(`Sending ${amount} tokens to ${recipient}`);
+      // Initiating token transfer
 
       setBusy(true);
       await wallet.getUtxos();
@@ -77,14 +77,9 @@ const SendTokens = ({ token, onAllTokensSent }) => {
           qty: amount
         }
       ];
-      const txid = await wallet.sendTokens(receivers, 3);
+      await wallet.sendTokens(receivers, 3);
 
-      console.log(`txid: ${txid}`);
-      var explorerUrl = `https://blockchair.com/bitcoin-cash/transaction/${txid}`;
-      console.log(`explorer 1: ${explorerUrl}`);
-      explorerUrl = `https://bch.loping.net/tx/${txid}`;
-      console.log(`explorer 2: ${explorerUrl}`);
-      console.log('Updating tokens balance...');
+      // Transaction successful, updating balance
 
       await wallet.getUtxos();
       let updatedToken = null;
@@ -112,8 +107,6 @@ const SendTokens = ({ token, onAllTokensSent }) => {
 
   return (
     <div className="container send-tokens-container">
-      <fieldset className="form-group">
-        <legend>[ Send tokens]</legend>
       <div className="send-group">
         <label htmlFor="recipient-address">Recipient Address:</label>
         <div className="form-input-group">
@@ -134,6 +127,20 @@ const SendTokens = ({ token, onAllTokensSent }) => {
             Scan QR
           </button>
         </div>
+
+        {/* QR Scanner Modal */}
+        {showScanner && (
+          <div className="qr-scanner-modal">
+            <button
+              disabled={busy}
+              className="close-scanner-button"
+              onClick={() => setShowScanner(false)}
+            >
+              Close Scanner
+            </button>
+            <QrCodeScanner onAddressDetected={handleAddressDetected} />
+          </div>
+        )}
       </div>
       <div className="send-group">
         <label htmlFor="amount">Amount:</label>
@@ -155,19 +162,6 @@ const SendTokens = ({ token, onAllTokensSent }) => {
       >
         Send
       </button>
-      {showScanner && (
-         <div>
-           <button
-              disabled={busy}
-              className="close-scanner-button"
-              onClick={() => setShowScanner(false)}
-           >
-             Close Scanner
-           </button>
-           <QrCodeScanner onAddressDetected={handleAddressDetected} />
-         </div>
-       )}
-      </fieldset>
     </div>
   );
 };

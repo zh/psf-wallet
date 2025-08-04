@@ -11,7 +11,7 @@ const Sweeper = () => {
   const [walletConnected] = useAtom(walletConnectedAtom);
   const [busy, setBusy] = useAtom(busyAtom);
   const setNotification = useSetAtom(notificationAtom);
-  
+
   // State management
   const [sweepKey, setSweepKey] = useState('');
   const [showScanner, setShowScanner] = useState(false);
@@ -28,7 +28,7 @@ const Sweeper = () => {
 
     try {
       let key = '';
-      
+
       if (Array.isArray(scannedData) && scannedData.length > 0) {
         key = scannedData[0].rawValue || scannedData[0].text || scannedData[0];
       } else if (typeof scannedData === 'string') {
@@ -49,7 +49,7 @@ const Sweeper = () => {
       console.error('Error processing scanned data:', error);
       setNotification({ type: 'error', message: 'Error processing QR code data.' });
     }
-    
+
     setShowScanner(false);
   };
 
@@ -88,10 +88,10 @@ const Sweeper = () => {
       // Create temporary wallet from WIF to check balance
       const tempWallet = new wallet.constructor(sweepKey, { interface: 'consumer-api', restURL: wallet.bchjs.restURL });
       await tempWallet.walletInfoPromise;
-      
+
       const satsBalance = await tempWallet.getBalance();
       const bchBalance = wallet.bchjs.BitcoinCash.toBitcoinCash(satsBalance);
-      
+
       if (satsBalance === 0) {
         setNotification({ type: 'warning', message: 'Paper wallet has zero balance' });
         setPhase('input');
@@ -104,7 +104,7 @@ const Sweeper = () => {
         bchBalance,
         targetAddress: wallet.walletInfo.cashAddress
       });
-      
+
       setPhase('confirm');
       setNotification({ type: 'success', message: `Found ${bchBalance} BCH in paper wallet` });
     } catch (error) {
@@ -128,22 +128,22 @@ const Sweeper = () => {
       const privateKey = wallet?.walletInfo?.privateKey;
       const slpAddress = wallet?.walletInfo?.slpAddress;
       if (!privateKey || !slpAddress) throw new Error('Wallet info is invalid.');
-      
+
       const sweeper = new Sweep(sweepKey, privateKey, wallet);
       if (!sweeper) throw new Error('Sweep library is invalid.');
 
       await sweeper.populateObjectFromNetwork();
       const transactionHex = await sweeper.sweepTo(slpAddress);
       const txid = await sweeper.blockchain.broadcast(transactionHex);
-      
+
       console.log(`Sweep completed - TXID: ${txid}`);
       console.log(`Explorer: https://blockchair.com/bitcoin-cash/transaction/${txid}`);
-      
-      setNotification({ 
-        type: 'success', 
-        message: `Swept ${paperWalletInfo.bchBalance} BCH successfully! TXID: ${txid.substring(0, 8)}...` 
+
+      setNotification({
+        type: 'success',
+        message: `Swept ${paperWalletInfo.bchBalance} BCH successfully! TXID: ${txid.substring(0, 8)}...`
       });
-      
+
       // Reset state
       resetSweepState();
     } catch (error) {
@@ -206,18 +206,7 @@ const Sweeper = () => {
           ✓ Valid WIF format
         </div>
       )}
-      
-      <div className="form-actions">
-        <button
-          type="button"
-          onClick={checkPaperWallet}
-          className="check-button"
-          disabled={!walletConnected || busy || !sweepKey || validationError}
-        >
-          {busy && phase === 'checking' ? 'Checking...' : 'Check Balance'}
-        </button>
-      </div>
-      
+
       {showScanner && (
         <div className="qr-scanner-modal">
           <button
@@ -231,6 +220,17 @@ const Sweeper = () => {
           <QrCodeScanner onAddressDetected={handleAddressDetected} />
         </div>
       )}
+
+      <div className="form-actions">
+        <button
+          type="button"
+          onClick={checkPaperWallet}
+          className="check-button"
+          disabled={!walletConnected || busy || !sweepKey || validationError}
+        >
+          {busy && phase === 'checking' ? 'Checking...' : 'Check Balance'}
+        </button>
+      </div>
     </>
   );
 
@@ -249,11 +249,11 @@ const Sweeper = () => {
         <span className="label">Amount:</span>
         <span className="value highlight">{paperWalletInfo?.bchBalance} BCH</span>
       </div>
-      
+
       <div className="warning-box">
         <strong>⚠️ Warning:</strong> This operation will move all funds from the paper wallet to your current wallet. This action cannot be undone.
       </div>
-      
+
       <div className="form-actions">
         <button
           type="button"

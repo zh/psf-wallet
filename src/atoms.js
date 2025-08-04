@@ -10,7 +10,7 @@ const DEFAULT_SERVERS = [
     status: 'unknown'
   },
   {
-    id: 'paid-fullstack', 
+    id: 'paid-fullstack',
     name: 'FullStack.cash (Paid)',
     url: 'https://api.fullstack.cash',
     type: 'paid',

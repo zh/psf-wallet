@@ -18,7 +18,7 @@ const Address = ({
   if (!walletConnected || !wallet) return;
 
   const shortify = (address) => {
-    return `${address.split(':')[1].substr(0, 4)}...${address.split(':')[1].substr(-4)}`
+    return `${address.split(':')[1].slice(0, 4)}...${address.split(':')[1].slice(-4)}`
   }
 
   const handleSwitch = (type) => {

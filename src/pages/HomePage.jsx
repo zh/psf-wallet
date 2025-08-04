@@ -19,6 +19,7 @@ const HomePage = () => {
   return (
     <MobileLayout title="Wallet">
       <div className="home-content">
+        {/* Disconnect button at top */}
         {walletConnected && (
           <div className="wallet-actions-top">
             <button
@@ -29,14 +30,10 @@ const HomePage = () => {
             </button>
           </div>
         )}
-        
-        <div className="wallet-overview">
-          <Balance />
-        </div>
-        
+
+        {/* Address component (QR + address) */}
         {walletConnected && (
-          <div className="receive-section">
-            <h2>Receive BCH</h2>
+          <div className="address-section">
             <Address
               addressFormat={'long'}
               showSLP={false}
@@ -45,6 +42,11 @@ const HomePage = () => {
             />
           </div>
         )}
+
+        {/* Balance component */}
+        <div className="wallet-overview">
+          <Balance />
+        </div>
       </div>
     </MobileLayout>
   );

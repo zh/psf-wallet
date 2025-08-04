@@ -12,7 +12,7 @@ import { createSmartPoller } from '../utils/smartPoller';
 export const useSmartPoller = (pollFunction, config = {}, dependencies = []) => {
   const pollerRef = useRef(null);
   const configRef = useRef(config);
-  
+
   // Update config reference when it changes
   configRef.current = config;
 
@@ -22,7 +22,7 @@ export const useSmartPoller = (pollFunction, config = {}, dependencies = []) => 
   useEffect(() => {
     // Create poller instance
     pollerRef.current = createSmartPoller(memoizedPollFunction, configRef.current);
-    
+
     // Start polling
     pollerRef.current.start();
 

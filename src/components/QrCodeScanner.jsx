@@ -29,7 +29,7 @@ const QrCodeScanner = ({ onAddressDetected }) => {
         <p style={{ color: 'rgba(255, 255, 255, 0.6)', fontSize: '14px', marginBottom: '12px' }}>
           Please enter the private key manually above.
         </p>
-        <button 
+        <button
           onClick={handleRetry}
           className="retry-button"
         >
@@ -46,7 +46,6 @@ const QrCodeScanner = ({ onAddressDetected }) => {
           position: 'relative',
           width: '100%',
           maxWidth: '300px',
-          border: '2px solid #4caf50',
           borderRadius: '8px',
           overflow: 'hidden'
         }}>
@@ -66,13 +65,6 @@ const QrCodeScanner = ({ onAddressDetected }) => {
             }}
           />
         </div>
-      </div>
-      <div className="scanner-instructions">
-        <p>Position the QR code within the green viewfinder</p>
-        <p>Make sure the code is well-lit and clearly visible</p>
-        <p style={{ fontSize: '12px', color: 'rgba(255, 255, 255, 0.5)' }}>
-          Working in Chrome, may have issues in Firefox
-        </p>
       </div>
     </div>
   );

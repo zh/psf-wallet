@@ -18,7 +18,7 @@ const DisconnectedView = () => {
   return (
     <div className="disconnected-view">
       <LoadScript scriptSrc="/minimal-slp-wallet.min.js" />
-      
+
       <div className="app-title">
         PSF Wallet
       </div>
@@ -27,7 +27,7 @@ const DisconnectedView = () => {
 
       <div className="wallet-setup">
         <Mnemonic />
-        
+
         <div className="server-selector">
           <h2>Connection</h2>
           <select
@@ -48,7 +48,7 @@ const DisconnectedView = () => {
             </option>
           </select>
         </div>
-        
+
         <Wallet showOptimize={true} />
       </div>
 

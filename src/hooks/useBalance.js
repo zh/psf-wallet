@@ -6,7 +6,7 @@ import {
   balanceAtom,
   balanceRefreshTriggerAtom,
 } from '../atoms';
-import { handleError, safeAsyncOperation } from '../utils/errorHandler';
+import { handleError } from '../utils/errorHandler';
 
 const useBalance = () => {
   const [wallet] = useAtom(walletAtom);
@@ -33,14 +33,14 @@ const useBalance = () => {
       // Direct call to wallet.getBalance - no safeAsyncOperation wrapper
       const sats = await wallet.getBalance(wallet.walletInfo.cashAddress);
       const bchBalance = wallet.bchjs.BitcoinCash.toBitcoinCash(sats);
-      console.log('✅ Balance fetch successful:', { sats, bchBalance });
+      // Balance fetch successful
 
       setSatsBalance(sats);
       setBalance(bchBalance);
       setError(null);
     } catch (error) {
       const handledError = handleError(error, 'balance_fetch');
-      console.log('❌ Balance fetch failed:', handledError);
+      // Balance fetch failed
       setError(handledError.message);
       setBalance(0);
       setSatsBalance(0);

@@ -13,12 +13,12 @@ const AddressDisplay = ({ showCopy = true }) => {
   }
 
   const address = wallet.walletInfo.cashAddress;
-  
+
   // Format address like mainnet wallet: xxxxxx...yyyyyy
   const formatAddress = (addr) => {
     // Remove prefix if present
     const cleanAddress = addr.replace(/^(bitcoincash:|bchtest:|bchreg:)/, '');
-    
+
     if (cleanAddress.length > 12) {
       return `${cleanAddress.substring(0, 6)}...${cleanAddress.substring(cleanAddress.length - 6)}`;
     }
@@ -27,7 +27,7 @@ const AddressDisplay = ({ showCopy = true }) => {
 
   const handleCopyAddress = async () => {
     if (!showCopy) return;
-    
+
     try {
       await navigator.clipboard.writeText(address);
       setCopied(true);
@@ -40,7 +40,7 @@ const AddressDisplay = ({ showCopy = true }) => {
   return (
     <div className="address-display">
       <div className="address-label">Address:</div>
-      <div 
+      <div
         className={`address-value ${showCopy ? 'clickable' : ''}`}
         onClick={handleCopyAddress}
         title={showCopy ? (copied ? 'Copied!' : 'Click to copy full address') : address}

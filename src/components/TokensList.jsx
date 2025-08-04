@@ -32,7 +32,7 @@ const TokensList = () => {
       <div className="tokens-list-wrapper">
         {loading && <div className="loading-message">Loading tokens...</div>}
         {error && <div className="error-message">Error: {error}</div>}
-        
+
         {!loading && !error && tokens.length > 0 && (
           <div className="token-list">
             {tokens.map((token, index) => (
@@ -44,7 +44,7 @@ const TokensList = () => {
             ))}
           </div>
         )}
-        
+
         {!loading && !error && tokens.length === 0 && (
           <div className="no-tokens">
             <p>No tokens found in your wallet</p>

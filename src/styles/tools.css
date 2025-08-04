@@ -151,34 +151,7 @@
   min-width: 100px;
 }
 
-.form-group {
-  margin-bottom: 16px;
-}
-
-.form-input-group {
-  display: flex;
-  gap: 8px;
-  align-items: stretch;
-  margin-bottom: 8px;
-}
-
-.form-input {
-  flex: 1;
-  padding: 10px 12px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid #555;
-  border-radius: 4px;
-  color: rgba(255, 255, 255, 0.87);
-  font-size: 14px;
-  transition: all 0.2s ease;
-}
-
-.form-input:focus {
-  outline: none;
-  border-color: #646cff;
-  background: rgba(255, 255, 255, 0.08);
-}
-
+/* Form inputs now inherit from common.css */
 .form-input.error {
   border-color: #f44336;
   background: rgba(244, 67, 54, 0.1);
@@ -196,16 +169,9 @@
   margin-top: 4px;
 }
 
-.form-label {
-  display: block;
-  margin-bottom: 8px;
-  font-size: 14px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.87);
-}
+/* Form labels now inherit from common.css */
 
-/* Button Styles */
-.scan-button,
+/* Button Styles - scan-button now inherits from common.css */
 .check-button,
 .sweep-button,
 .cancel-button,
@@ -222,7 +188,6 @@
   font-weight: 500;
 }
 
-.scan-button:hover,
 .check-button:hover:not(:disabled),
 .cancel-button:hover:not(:disabled),
 .close-scanner-button:hover:not(:disabled) {
@@ -230,7 +195,6 @@
   border-color: #777;
 }
 
-.scan-button:disabled,
 .check-button:disabled,
 .sweep-button:disabled,
 .cancel-button:disabled,
@@ -275,7 +239,7 @@
 .form-actions {
   display: flex;
   gap: 12px;
-  justify-content: flex-end;
+  justify-content: center;
   margin-top: 16px;
 }
 
@@ -431,8 +395,15 @@
     gap: 8px;
   }
   
-  .scan-button,
-  .sweep-button {
+  .form-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .check-button,
+  .sweep-button,
+  .cancel-button {
     width: 100%;
+    max-width: 200px;
   }
 }

@@ -7,6 +7,7 @@
     "dev": "npm run script && vite",
     "build": "vite build",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "preview": "vite preview",
     "script": "cp -f ../optimized-slp-wallet/dist/minimal-slp-wallet.min.js public/"
   },
@@ -19,11 +20,13 @@
     "crypto-browserify": "^3.12.0",
     "jotai": "^2.11.0",
     "minimal-slp-wallet": "^5.12.1",
+    "pouns-sdk": "^1.0.5",
     "prop-types": "^15.8.1",
     "qrcode.react": "^4.1.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.7.1",
+    "slp-mutable-data": "^2.3.16",
     "stream-browserify": "^3.0.0",
     "url": "^0.11.0",
     "util": "^0.12.5"

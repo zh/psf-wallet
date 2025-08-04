@@ -1,9 +1,9 @@
+/* Use unified container styling */
 .sweeper-container {
+  max-width: 600px;
+  margin: 0 auto;
   padding: 16px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid #333;
-  border-radius: 8px;
-  margin: 16px 0;
+  box-sizing: border-box;
 }
 
 .sweeper-title {
@@ -105,4 +105,36 @@
   border-bottom: 1px solid #333;
   font-size: 13px;
   color: rgba(255, 255, 255, 0.6);
+}
+
+/* Override tools.css scan button styling to match SendBCH button */
+.sweeper-container .scan-button {
+  background: #646cff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  min-width: 60px;
+}
+
+.sweeper-container .scan-button:hover {
+  background: #535bf2;
+}
+
+.sweeper-container .scan-button:disabled {
+  background: #444;
+  color: #888;
+  cursor: not-allowed;
+}
+
+/* Prevent 100% width on mobile for sweeper scan button */
+@media (max-width: 600px) {
+  .sweeper-container .scan-button {
+    width: auto;
+    min-width: 60px;
+  }
 }

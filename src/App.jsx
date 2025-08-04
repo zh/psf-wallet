@@ -5,7 +5,6 @@ import HomePage from './pages/HomePage';
 import TokensPage from './pages/TokensPage';
 import SendPage from './pages/SendPage';
 import ToolsPage from './pages/ToolsPage';
-import SettingsPage from './pages/SettingsPage';
 
 import './App.css';
 

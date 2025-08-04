@@ -13,7 +13,7 @@
  */
 export const handleError = (error, context = '') => {
   const originalMessage = error?.message || error?.toString() || 'An error occurred';
-  
+
   // Remove sensitive patterns
   let sanitizedMessage = originalMessage
     // Remove private keys (WIF format: L/K followed by 51 chars)
@@ -137,7 +137,7 @@ export const safeAsyncOperation = async (operation, context = '', fallback = nul
     return await operation();
   } catch (error) {
     const handledError = handleError(error, context);
-    
+
     if (fallback && typeof fallback === 'function') {
       try {
         return await fallback(handledError);
@@ -145,7 +145,7 @@ export const safeAsyncOperation = async (operation, context = '', fallback = nul
         throw handleError(fallbackError, `${context}_fallback`);
       }
     }
-    
+
     throw handledError;
   }
 };
@@ -158,7 +158,7 @@ export const safeAsyncOperation = async (operation, context = '', fallback = nul
  */
 export const secureLog = (error, context = '', level = 'error') => {
   const handledError = handleError(error, context);
-  
+
   // Only log in development or when explicitly enabled
   if (import.meta?.env?.DEV || globalThis?.DEBUG_LOGGING) {
     console[level](`[${context}] ${handledError.category}:`, {
@@ -184,30 +184,30 @@ export const withRetry = async (operation, options = {}) => {
   } = options;
 
   let lastError;
-  
+
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
     try {
       return await operation();
     } catch (error) {
       lastError = error;
-      
+
       if (attempt === maxAttempts) {
         break;
       }
-      
+
       // Don't retry on certain error types
       const handledError = handleError(error, context);
       if (['validation', 'wallet'].includes(handledError.category)) {
         break;
       }
-      
+
       // Wait before retrying with exponential backoff
-      await new Promise(resolve => 
+      await new Promise(resolve =>
         setTimeout(resolve, delay * Math.pow(backoff, attempt - 1))
       );
     }
   }
-  
+
   throw handleError(lastError, `${context}_retry_failed`);
 };
 
@@ -219,9 +219,9 @@ export const withRetry = async (operation, options = {}) => {
  */
 export const handleComponentError = (error, errorInfo = {}) => {
   const handledError = handleError(error, 'component_error');
-  
+
   secureLog(error, 'ComponentErrorBoundary', 'error');
-  
+
   return {
     hasError: true,
     error: handledError,

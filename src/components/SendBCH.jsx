@@ -35,7 +35,7 @@ const SendBCH = () => {
 
   const formatBalance = (bal, unit) => {
     if (!bal || bal === 0) return '0';
-    
+
     switch (unit) {
       case 'sat':
         return (bal * 100000000).toFixed(0);
@@ -51,7 +51,7 @@ const SendBCH = () => {
   const convertAmount = (amount, fromUnit) => {
     const numAmount = parseFloat(amount);
     if (isNaN(numAmount)) return 0;
-    
+
     switch (fromUnit) {
       case 'sat':
         return numAmount / 100000000;
@@ -74,12 +74,12 @@ const SendBCH = () => {
       if (Array.isArray(scannedData) && scannedData.length > 0) {
         const rawAddress = scannedData[0].rawValue;
         const sanitizedAddress = sanitizeInput(rawAddress, 'address');
-        
+
         if (!isValidBCHAddress(sanitizedAddress)) {
           setNotification({ type: 'error', message: 'Invalid BCH address format.' });
           return;
         }
-        
+
         handleInputChange('address', sanitizedAddress);
         setNotification({ type: 'success', message: 'Address scanned successfully.' });
       } else {
@@ -127,20 +127,20 @@ const SendBCH = () => {
       }
 
       setBusy(true);
-      
+
       const result = await safeAsyncOperation(
         async () => {
           const bchjs = wallet.bchjs;
           let bchAddr = sanitizedRecipient;
-          
+
           // Convert SLP address to cash address if needed
           if (!bchAddr.includes('bitcoincash:')) {
             bchAddr = bchjs.SLP.Address.toCashAddress(bchAddr);
           }
-          
+
           const sats = bchjs.BitcoinCash.toSatoshi(bchAmount);
           const satsBalance = bchjs.BitcoinCash.toSatoshi(balance || 0);
-          
+
           if (sats > satsBalance) {
             throw new Error('Insufficient balance for this transaction.');
           }
@@ -164,9 +164,9 @@ const SendBCH = () => {
         amount: '',
         unit: 'bch'
       });
-      setNotification({ 
-        type: 'success', 
-        message: `${bchAmount} BCH sent! TXID: ${result.substring(0, 8)}...` 
+      setNotification({
+        type: 'success',
+        message: `${bchAmount} BCH sent! TXID: ${result.substring(0, 8)}...`
       });
     } catch (error) {
       const handledError = handleError(error, 'send_transaction');
@@ -179,7 +179,7 @@ const SendBCH = () => {
   return (
     <div className="sendbch-container">
       <h2>Send</h2>
-      
+
       <form onSubmit={handleSend}>
           {/* Address Input with QR Scanner */}
           <div className="send-group">
@@ -198,12 +198,27 @@ const SendBCH = () => {
                 className="scan-button"
                 disabled={busy}
               >
-                QR
+                QR Scan
               </button>
             </div>
             {sendForm.address && !isValidBCHAddress(sendForm.address) && (
               <div className="error-text">
                 Invalid BCH address format
+              </div>
+            )}
+
+            {/* QR Scanner Modal */}
+            {showScanner && (
+              <div className="qr-scanner-modal">
+                <button
+                  type="button"
+                  disabled={busy}
+                  className="close-scanner-button"
+                  onClick={() => setShowScanner(false)}
+                >
+                  Close Scanner
+                </button>
+                <QrCodeScanner onAddressDetected={handleAddressDetected} />
               </div>
             )}
           </div>
@@ -248,21 +263,6 @@ const SendBCH = () => {
             </button>
           </div>
         </form>
-
-      {/* QR Scanner Modal */}
-      {showScanner && (
-        <div className="qr-scanner-modal">
-          <button
-            type="button"
-            disabled={busy}
-            className="close-scanner-button"
-            onClick={() => setShowScanner(false)}
-          >
-            Close Scanner
-          </button>
-          <QrCodeScanner onAddressDetected={handleAddressDetected} />
-        </div>
-      )}
     </div>
   );
 };

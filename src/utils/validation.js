@@ -19,13 +19,13 @@ export const sanitizeInput = (input, context = 'general') => {
   // Remove control characters and null bytes
   // eslint-disable-next-line no-control-regex
   let sanitized = input.replace(/[\x00-\x1F\x7F-\x9F]/g, '');
-  
+
   // Remove potentially dangerous HTML/script tags
   sanitized = sanitized.replace(/<[^>]*>/g, '');
-  
+
   // Trim whitespace
   sanitized = sanitized.trim();
-  
+
   return sanitized;
 };
 
@@ -40,14 +40,14 @@ export const isValidBCHAddress = (address) => {
   }
 
   const sanitized = sanitizeInput(address, 'address');
-  
+
   // BCH address formats
   const cashAddressRegex = /^bitcoincash:[a-z0-9]{42,62}$/;
   const legacyAddressRegex = /^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$/;
   const slpAddressRegex = /^simpleledger:[a-z0-9]{42,62}$/;
-  
-  return cashAddressRegex.test(sanitized) || 
-         legacyAddressRegex.test(sanitized) || 
+
+  return cashAddressRegex.test(sanitized) ||
+         legacyAddressRegex.test(sanitized) ||
          slpAddressRegex.test(sanitized);
 };
 
@@ -63,7 +63,7 @@ export const isValidAmount = (amount, type = 'bch') => {
   }
 
   const numAmount = parseFloat(amount);
-  
+
   if (isNaN(numAmount) || numAmount <= 0) {
     return false;
   }
@@ -72,15 +72,15 @@ export const isValidAmount = (amount, type = 'bch') => {
     case 'bch':
       // BCH has 8 decimal places max, reasonable upper limit
       return numAmount <= 21000000 && /^\d+\.?\d{0,8}$/.test(amount.toString());
-    
+
     case 'satoshi':
       // Satoshi amounts should be integers
       return Number.isInteger(numAmount) && numAmount > 0 && numAmount <= 2100000000000000;
-    
+
     case 'token':
       // Token amounts can vary, but should be reasonable
       return numAmount <= 1e15 && /^\d+\.?\d{0,18}$/.test(amount.toString());
-    
+
     default:
       return false;
   }
@@ -97,7 +97,7 @@ export const isValidTokenId = (tokenId) => {
   }
 
   const sanitized = sanitizeInput(tokenId, 'tokenId');
-  
+
   // Token ID should be 64 character hex string
   return /^[a-fA-F0-9]{64}$/.test(sanitized);
 };
@@ -114,9 +114,9 @@ export const isValidMnemonicFormat = (mnemonic) => {
 
   const sanitized = sanitizeInput(mnemonic, 'mnemonic');
   const words = sanitized.split(/\s+/);
-  
+
   // Standard BIP39 mnemonic lengths
-  return [12, 15, 18, 21, 24].includes(words.length) && 
+  return [12, 15, 18, 21, 24].includes(words.length) &&
          words.every(word => /^[a-z]+$/.test(word));
 };
 
@@ -131,7 +131,7 @@ export const isValidTxId = (txid) => {
   }
 
   const sanitized = sanitizeInput(txid, 'txid');
-  
+
   // TXID should be 64 character hex string
   return /^[a-fA-F0-9]{64}$/.test(sanitized);
 };
@@ -147,7 +147,7 @@ export const isValidWIF = (wif) => {
   }
 
   const sanitized = sanitizeInput(wif, 'wif');
-  
+
   // WIF should be 51 or 52 characters and start with L, K, or 5
   // L and K are for compressed keys (52 chars)
   // 5 is for uncompressed keys (51 chars)
@@ -199,7 +199,7 @@ const rateLimitStore = new Map();
 export const isWithinRateLimit = (key, maxAttempts = 5, timeWindowMs = 60000) => {
   const now = Date.now();
   const record = rateLimitStore.get(key) || { attempts: 0, firstAttempt: now };
-  
+
   // Reset if time window has passed
   if (now - record.firstAttempt > timeWindowMs) {
     record.attempts = 1;
@@ -207,9 +207,9 @@ export const isWithinRateLimit = (key, maxAttempts = 5, timeWindowMs = 60000) =>
   } else {
     record.attempts++;
   }
-  
+
   rateLimitStore.set(key, record);
-  
+
   return record.attempts <= maxAttempts;
 };
 

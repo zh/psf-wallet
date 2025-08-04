@@ -53,6 +53,15 @@
   background: rgba(255, 255, 255, 0.1);
 }
 
+.top-bar .back-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.top-bar .back-button:disabled:hover {
+  background: none;
+}
+
 .top-bar-left {
   display: flex;
   align-items: center;

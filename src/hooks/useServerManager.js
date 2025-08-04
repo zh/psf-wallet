@@ -12,7 +12,7 @@ const useServerManager = () => {
   const testServerConnection = useCallback(async (server) => {
     try {
       setServerStatus(prev => ({ ...prev, [server.id]: 'testing' }));
-      
+
       // Create a test request to the server
       const testUrl = `${server.url}/v5/control/getStatus`;
       const controller = new AbortController();
@@ -44,11 +44,11 @@ const useServerManager = () => {
       }
     } catch (error) {
       setServerStatus(prev => ({ ...prev, [server.id]: 'offline' }));
-      
+
       if (error.name === 'AbortError') {
         return { success: false, status: 'offline', error: 'Connection timeout' };
       }
-      
+
       return { success: false, status: 'offline', error: error.message };
     }
   }, [setServerStatus]);
@@ -56,10 +56,10 @@ const useServerManager = () => {
   // Test all servers
   const testAllServers = useCallback(async () => {
     setIsTestingConnection(true);
-    
+
     const testPromises = serverList.map(server => testServerConnection(server));
     await Promise.allSettled(testPromises);
-    
+
     setIsTestingConnection(false);
   }, [serverList, testServerConnection]);
 
@@ -72,7 +72,7 @@ const useServerManager = () => {
 
     // Test the server before switching
     const testResult = await testServerConnection(server);
-    
+
     if (testResult.success) {
       setSelectedServer(server);
       return { success: true };
@@ -111,7 +111,7 @@ const useServerManager = () => {
 
     // Add to server list
     setServerList(prev => [...prev, newServer]);
-    
+
     // Test the new server
     testServerConnection(newServer);
 
@@ -121,7 +121,7 @@ const useServerManager = () => {
   // Remove a custom server
   const removeCustomServer = useCallback((serverId) => {
     const server = serverList.find(s => s.id === serverId);
-    
+
     if (!server) {
       throw new Error('Server not found');
     }
@@ -140,7 +140,7 @@ const useServerManager = () => {
 
     // Remove from server list
     setServerList(prev => prev.filter(s => s.id !== serverId));
-    
+
     // Remove from status
     setServerStatus(prev => {
       const newStatus = { ...prev };
