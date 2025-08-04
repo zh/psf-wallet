@@ -5,7 +5,7 @@
 .mnemonic-container h2 {
   font-size: 18px;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.87);
+  color: var(--text-primary);
   margin-bottom: 12px;
   text-align: center;
 }
@@ -20,32 +20,33 @@
   font-size: 14px;
   line-height: 1.4;
   padding: 12px 16px;
-  background: rgba(0, 0, 0, 0.3);
-  border: 1px solid #444;
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
   border-radius: 6px;
-  color: rgba(255, 255, 255, 0.87);
+  color: var(--input-text);
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .mnemonic-input:focus {
   outline: none;
-  border-color: #646cff;
+  border-color: var(--border-focus);
   box-shadow: 0 0 0 2px rgba(100, 108, 255, 0.2);
+  background: var(--input-focus-bg);
 }
 
 .mnemonic-input:disabled {
-  background: rgba(0, 0, 0, 0.1);
-  color: rgba(255, 255, 255, 0.3);
-  border-color: #333;
+  background: var(--input-disabled-bg);
+  color: var(--input-disabled-text);
+  border-color: var(--border-primary);
 }
 
 .mnemonic-generate-button {
-  background: #646cff;
+  background: var(--accent-primary);
   min-width: 100px;
 }
 
 .mnemonic-generate-button:hover {
-  background: #535bf2;
+  background: var(--accent-primary-hover);
 }
 
 .mnemonic-actions {
@@ -59,10 +60,10 @@
 .mnemonic-save-button,
 .mnemonic-reset-button,
 .mnemonic-generate-button {
-  background: #646cff;
+  background: var(--accent-primary);
   border: none;
   border-radius: 6px;
-  color: white;
+  color: var(--text-inverse);
   padding: 10px 16px;
   font-size: 14px;
   font-weight: 500;
@@ -72,29 +73,30 @@
 }
 
 .mnemonic-save-button {
-  background: #4caf50;
+  background: var(--accent-success);
 }
 
 .mnemonic-save-button:hover {
-  background: #45a049;
+  background: var(--accent-success-hover);
 }
 
 .mnemonic-reset-button {
-  background: #f44336;
+  background: var(--accent-danger);
 }
 
 .mnemonic-reset-button:hover {
-  background: #da190b;
+  background: var(--accent-danger-hover);
 }
 
 .mnemonic-generate-button:hover {
-  background: #535bf2;
+  background: var(--accent-primary-hover);
 }
 
 .mnemonic-save-button:disabled,
 .mnemonic-reset-button:disabled,
 .mnemonic-generate-button:disabled {
-  background: #555;
+  background: var(--input-disabled-bg);
+  color: var(--input-disabled-text);
   cursor: not-allowed;
 }
 
@@ -115,9 +117,9 @@
 }
 
 .security-notice {
-  background: #fff3cd;
-  border: 1px solid #ffeaa7;
-  color: #856404;
+  background: var(--notification-warning-bg);
+  border: 1px solid var(--notification-warning-border);
+  color: var(--notification-warning-text);
   padding: 12px;
   border-radius: 4px;
   margin: 12px 0;

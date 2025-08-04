@@ -1,3 +1,6 @@
+/* Import themes first */
+@import './styles/themes.css';
+
 /* Import all component styles */
 @import './styles/common.css';
 @import './styles/wallet.css';
@@ -21,8 +24,8 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #000;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -39,8 +42,8 @@
 
 html, body {
   height: 100%;
-  background-color: #000;
-  color: rgba(255, 255, 255, 0.87);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   line-height: 1.5;
   font-size: 16px;
 }
@@ -70,9 +73,9 @@ html, body {
   left: 0;
   right: 0;
   height: 50px;
-  background: #000;
+  background: var(--nav-bg);
   z-index: 100;
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid var(--nav-border);
 }
 
 .top-bar-content {
@@ -87,7 +90,7 @@ html, body {
 .back-button {
   background: none;
   border: none;
-  color: #646cff;
+  color: var(--nav-text);
   cursor: pointer;
   padding: 8px;
   margin-right: 16px;
@@ -96,7 +99,7 @@ html, body {
 }
 
 .back-button:hover {
-  background-color: #333;
+  background-color: var(--bg-overlay);
 }
 
 .page-title {
@@ -104,7 +107,7 @@ html, body {
   text-align: center;
   margin: 0;
   font-size: 16px;
-  color: #ffffff;
+  color: var(--nav-text);
   font-weight: 600;
 }
 
@@ -128,12 +131,12 @@ html, body {
   left: 0;
   right: 0;
   height: 60px;
-  background: #000;
+  background: var(--nav-bg);
   display: flex;
   justify-content: space-around;
   align-items: center;
   z-index: 100;
-  border-top: 1px solid #333;
+  border-top: 1px solid var(--nav-border);
 }
 
 .nav-item {

@@ -1,7 +1,7 @@
 .walletdetails-container {
   padding: 16px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid #333;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
   border-radius: 8px;
   margin: 16px 0;
 }
@@ -9,7 +9,7 @@
 .walletdetails-title {
   font-size: 18px;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.87);
+  color: var(--text-primary);
   margin-bottom: 16px;
   text-align: center;
 }
@@ -21,12 +21,12 @@
 .walletdetails-info p {
   margin: 12px 0;
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.87);
+  color: var(--text-primary);
   line-height: 1.5;
 }
 
 .walletdetails-info strong {
-  color: #646cff;
+  color: var(--accent-primary);
   font-weight: 600;
 }
 
@@ -35,7 +35,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 12px 0;
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid var(--border-primary);
 }
 
 .wallet-detail-item:last-child {
@@ -44,13 +44,13 @@
 
 .wallet-detail-label {
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-secondary);
   font-weight: 500;
 }
 
 .wallet-detail-value {
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.87);
+  color: var(--text-primary);
   font-family: 'Courier New', monospace;
   text-align: right;
   max-width: 60%;
@@ -65,8 +65,8 @@
 }
 
 .wallet-action-button {
-  background: #646cff;
-  color: white;
+  background: var(--accent-primary);
+  color: var(--text-inverse);
   padding: 10px 20px;
   border: none;
   border-radius: 6px;
@@ -77,13 +77,13 @@
 }
 
 .wallet-action-button:hover {
-  background: #535bf2;
+  background: var(--accent-primary-hover);
 }
 
 .wallet-action-button.danger {
-  background: #f44336;
+  background: var(--accent-danger);
 }
 
 .wallet-action-button.danger:hover {
-  background: #da190b;
+  background: var(--accent-danger-hover);
 }

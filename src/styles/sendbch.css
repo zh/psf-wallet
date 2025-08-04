@@ -9,7 +9,7 @@
 .sendbch-container h2 {
   font-size: 20px;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.87);
+  color: var(--text-primary);
   margin-bottom: 20px;
   text-align: center;
 }
@@ -23,8 +23,8 @@
 }
 
 .unit-select {
-  background: #646cff;
-  color: white;
+  background: var(--accent-primary);
+  color: var(--text-inverse);
   border: none;
   border-radius: 6px;
   padding: 12px 8px;
@@ -36,24 +36,24 @@
 }
 
 .unit-select:hover {
-  background: #535bf2;
+  background: var(--accent-primary-hover);
 }
 
 .unit-select:disabled {
-  background: #444;
-  color: #888;
+  background: var(--input-disabled-bg);
+  color: var(--input-disabled-text);
   cursor: not-allowed;
 }
 
 .error-text {
   font-size: 12px;
-  color: #f44336;
+  color: var(--accent-danger);
   margin-top: 4px;
 }
 
 .balance-info {
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-secondary);
   margin-top: 4px;
 }
 
@@ -64,8 +64,8 @@
 }
 
 .send-button {
-  background: #4caf50;
-  color: white;
+  background: var(--accent-success);
+  color: var(--text-inverse);
   min-height: 48px;
   min-width: 120px;
   border: none;
@@ -78,26 +78,26 @@
 }
 
 .send-button:hover {
-  background: #45a049;
+  background: var(--accent-success-hover);
 }
 
 .send-button:disabled {
-  background: #444;
-  color: #888;
+  background: var(--input-disabled-bg);
+  color: var(--input-disabled-text);
   cursor: not-allowed;
 }
 
 .qr-scanner-modal {
   margin-top: 16px;
   padding: 16px;
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid #444;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
   border-radius: 8px;
 }
 
 .close-scanner-button {
-  background: #ff6b6b;
-  color: white;
+  background: var(--accent-danger);
+  color: var(--text-inverse);
   border: none;
   border-radius: 6px;
   padding: 8px 16px;
@@ -108,7 +108,7 @@
 }
 
 .close-scanner-button:hover {
-  background: #ff5252;
+  background: var(--accent-danger-hover);
 }
 
 /* Override tools.css media query to prevent scan button width from changing */

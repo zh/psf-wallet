@@ -1,10 +1,10 @@
 /* Unified form styling system */
 input, select, textarea {
   padding: 12px;
-  background: rgba(0, 0, 0, 0.3);
-  border: 1px solid #444;
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
   border-radius: 6px;
-  color: rgba(255, 255, 255, 0.87);
+  color: var(--input-text);
   font-size: 14px;
   font-family: inherit;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
@@ -12,22 +12,23 @@ input, select, textarea {
 
 input:focus, select:focus, textarea:focus {
   outline: none;
-  border-color: #646cff;
+  border-color: var(--border-focus);
   box-shadow: 0 0 0 2px rgba(100, 108, 255, 0.2);
+  background: var(--input-focus-bg);
 }
 
 input:disabled, select:disabled, textarea:disabled {
-  background: rgba(0, 0, 0, 0.1);
-  color: rgba(255, 255, 255, 0.3);
-  border-color: #333;
+  background: var(--input-disabled-bg);
+  color: var(--input-disabled-text);
+  border-color: var(--border-primary);
   cursor: not-allowed;
 }
 
 /* Button styles matching mainnet-wallet */
 button {
   padding: 12px 16px;
-  background: #646cff;
-  color: white;
+  background: var(--accent-primary);
+  color: var(--text-inverse);
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -39,12 +40,12 @@ button {
 }
 
 button:hover {
-  background: #535bf2;
+  background: var(--accent-primary-hover);
 }
 
 button:disabled {
-  background: #444;
-  color: #888;
+  background: var(--input-disabled-bg);
+  color: var(--input-disabled-text);
   cursor: not-allowed;
 }
 
@@ -71,7 +72,7 @@ button:focus {
   margin-bottom: 8px;
   font-size: 14px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.87);
+  color: var(--text-primary);
 }
 
 .form-input-group {
@@ -87,8 +88,8 @@ button:focus {
 
 /* Unified scan button styling */
 .scan-button {
-  background: #646cff;
-  color: white;
+  background: var(--accent-primary);
+  color: var(--text-inverse);
   border: none;
   border-radius: 6px;
   padding: 12px 16px;
@@ -101,12 +102,12 @@ button:focus {
 }
 
 .scan-button:hover {
-  background: #535bf2;
+  background: var(--accent-primary-hover);
 }
 
 .scan-button:disabled {
-  background: #444;
-  color: #888;
+  background: var(--input-disabled-bg);
+  color: var(--input-disabled-text);
   cursor: not-allowed;
 }
 

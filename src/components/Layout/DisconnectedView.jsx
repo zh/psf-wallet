@@ -2,6 +2,7 @@ import Mnemonic from '../Mnemonic';
 import Notification from '../Notify';
 import LoadScript from '../LoadScript';
 import Wallet from '../Wallet';
+import ThemeToggle from '../ThemeToggle';
 import { useAtom } from 'jotai';
 import { optionsAtom, walletAtom } from '../../atoms';
 import '../../styles/disconnected.css';
@@ -19,8 +20,11 @@ const DisconnectedView = () => {
     <div className="disconnected-view">
       <LoadScript scriptSrc="/minimal-slp-wallet.min.js" />
 
-      <div className="app-title">
-        PSF Wallet
+      <div className="app-header">
+        <div className="app-title">
+          BCH wallet
+        </div>
+        <ThemeToggle />
       </div>
 
       <Notification />

@@ -111,3 +111,26 @@ export const manualBalanceRefreshAtom = atom(null, (get, set) => {
 });
 manualBalanceRefreshAtom.debugLabel = 'manualBalanceRefreshAtom';
 
+// Theme management atom with localStorage persistence
+const getInitialTheme = () => {
+  if (typeof window !== 'undefined') {
+    const savedTheme = localStorage.getItem('wallet-theme');
+    return savedTheme || 'light'; // Default to light theme
+  }
+  return 'light';
+};
+
+export const themeAtom = atom(getInitialTheme());
+themeAtom.debugLabel = 'themeAtom';
+
+// Theme setter atom that also persists to localStorage
+export const themeSetterAtom = atom(null, (get, set, newTheme) => {
+  set(themeAtom, newTheme);
+  if (typeof window !== 'undefined') {
+    localStorage.setItem('wallet-theme', newTheme);
+    // Apply theme to document root
+    document.documentElement.setAttribute('data-theme', newTheme);
+  }
+});
+themeSetterAtom.debugLabel = 'themeSetterAtom';
+

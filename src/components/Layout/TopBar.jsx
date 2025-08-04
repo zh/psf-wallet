@@ -5,6 +5,7 @@ import { useAtom } from 'jotai';
 import { manualBalanceRefreshAtom, walletConnectedAtom } from '../../atoms';
 import { useBalance } from '../../hooks';
 import NetworkStatus from '../NetworkStatus';
+import ThemeToggle from '../ThemeToggle';
 
 const TopBar = ({ title }) => {
   const location = useLocation();
@@ -55,6 +56,7 @@ const TopBar = ({ title }) => {
         )}
         <h1 className="page-title">{title}</h1>
         <div className="top-bar-spacer">
+          <ThemeToggle compact={true} />
           <NetworkStatus compact={true} />
         </div>
       </div>

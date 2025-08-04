@@ -1,8 +1,8 @@
 /* Additional app-specific styles */
 .app-container {
   min-height: 100vh;
-  background-color: #000;
-  color: #fff;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
 }
 
 /* Loading states */
@@ -11,15 +11,15 @@
   justify-content: center;
   align-items: center;
   min-height: 200px;
-  color: #888;
+  color: var(--text-secondary);
 }
 
 .loading::after {
   content: '';
   width: 20px;
   height: 20px;
-  border: 2px solid #333;
-  border-top: 2px solid #646cff;
+  border: 2px solid var(--border-primary);
+  border-top: 2px solid var(--accent-primary);
   border-radius: 50%;
   animation: spin 1s linear infinite;
   margin-left: 10px;
