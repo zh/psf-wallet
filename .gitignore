@@ -71,6 +71,7 @@ coverage/
 # Temporary folders
 tmp/
 temp/
+public/*.js
 
 # Sensitive wallet data (NEVER commit these!)
 wallet.json
