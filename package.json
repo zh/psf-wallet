@@ -1,5 +1,6 @@
 {
   "name": "psf-wallet",
+  "description": "Minimalistic mobile-friendly React BCH wallet",
   "private": true,
   "version": "1.0.0",
   "type": "module",
