@@ -37,6 +37,28 @@ optionsAtom.debugLabel = 'optionsAtom';
 export const mnemonicAtom = atom('');
 mnemonicAtom.debugLabel = 'mnemonicAtom';
 
+// Mnemonic UI state management with localStorage persistence
+const getInitialMnemonicCollapsed = () => {
+  if (typeof window !== 'undefined') {
+    const saved = localStorage.getItem('psf-wallet-mnemonic-collapsed');
+    return saved === 'true';
+  }
+  return false;
+};
+
+const _mnemonicCollapsedAtom = atom(getInitialMnemonicCollapsed());
+
+export const mnemonicCollapsedAtom = atom(
+  (get) => get(_mnemonicCollapsedAtom),
+  (get, set, collapsed) => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('psf-wallet-mnemonic-collapsed', collapsed.toString());
+    }
+    set(_mnemonicCollapsedAtom, collapsed);
+  }
+);
+mnemonicCollapsedAtom.debugLabel = 'mnemonicCollapsedAtom';
+
 export const walletConnectedAtom = atom(false);
 walletConnectedAtom.debugLabel = 'walletConnectedAtom';
 

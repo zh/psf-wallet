@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useAtom, useSetAtom } from 'jotai';
-import { busyAtom, notificationAtom, mnemonicAtom, walletConnectedAtom } from '../atoms';
+import { busyAtom, notificationAtom, mnemonicAtom, walletConnectedAtom, mnemonicCollapsedAtom } from '../atoms';
 import { generateMnemonic, validateMnemonic } from '@scure/bip39';
 import { wordlist } from '@scure/bip39/wordlists/english';
 import { sanitizeInput, isValidMnemonicFormat } from '../utils/validation';
@@ -11,6 +11,7 @@ const Mnemonic = ({ showSave = true, showGenerate = true }) => {
   const [walletConnected] = useAtom(walletConnectedAtom);
   const setNotification = useSetAtom(notificationAtom);
   const [busy] = useAtom(busyAtom);
+  const [mnemonicCollapsed, setMnemonicCollapsed] = useAtom(mnemonicCollapsedAtom);
 
   // Load mnemonic from localStorage on component mount
   useEffect(() => {
@@ -18,7 +19,11 @@ const Mnemonic = ({ showSave = true, showGenerate = true }) => {
     if (savedMnemonic) {
       setMnemonic(savedMnemonic);
     }
-  }, [setMnemonic]);
+    // Always expand mnemonic section when mnemonic is empty (first access)
+    if (!savedMnemonic && !mnemonic) {
+      setMnemonicCollapsed(false);
+    }
+  }, [setMnemonic, mnemonic, setMnemonicCollapsed]);
 
   const handleGenerate = () => {
     const newMnemonic = generateMnemonic(wordlist);
@@ -59,40 +64,54 @@ const Mnemonic = ({ showSave = true, showGenerate = true }) => {
   };
 
   const handleReset = () => {
-    const confirmed = window.confirm('Are you sure you want to reset the wallet?');
-    if (confirmed) {
+    if (window.confirm('Reset wallet? This deletes all data.')) {
       localStorage.removeItem('mnemonic');
       setMnemonic('');
+      setMnemonicCollapsed(false);
       setNotification({ type: 'success', message: 'Mnemonic reset successfully.'});
     }
   };
 
+  const toggleMnemonicCollapsed = () => {
+    setMnemonicCollapsed(!mnemonicCollapsed);
+  };
+
   return (
     <div className="mnemonic-container">
-      <h2>Mnemonic</h2>
-
-        {/* Security Warning */}
-        <div className="security-warning" style={{
-          background: '#fff3cd',
-          border: '1px solid #ffeaa7',
-          borderRadius: '4px',
-          padding: '8px 12px',
-          margin: '8px 0',
-          fontSize: '0.9em',
-          color: '#856404'
-        }}>
-          ⚠️ <strong>Security Notice:</strong> Never share your mnemonic with anyone.
-        </div>
-      <div className="mnemonic-input-wrapper">
-        <input
-          id="mnemonic-input"
-          type="text"
-          value={mnemonic}
-          onChange={(e) => setMnemonic(sanitizeInput(e.target.value, 'mnemonic'))}
-          className="mnemonic-input"
-          disabled={walletConnected || busy} // Disable input when wallet is connected
-        />
+      <div
+        className="mnemonic-header"
+        onClick={toggleMnemonicCollapsed}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleMnemonicCollapsed();
+          }
+        }}
+        tabIndex={0}
+        role="button"
+        aria-expanded={!mnemonicCollapsed}
+        aria-controls="mnemonic-content"
+      >
+        <span className={`triangle ${mnemonicCollapsed ? 'collapsed' : 'expanded'}`}>
+          ▼
+        </span>
+        <span className="mnemonic-title">Mnemonic</span>
       </div>
+
+      {!mnemonicCollapsed && (
+        <div id="mnemonic-content" className="mnemonic-content">
+          <div className="mnemonic-input-wrapper">
+            <textarea
+              id="mnemonic-input"
+              value={mnemonic}
+              onChange={(e) => setMnemonic(sanitizeInput(e.target.value, 'mnemonic'))}
+              className="mnemonic-input"
+              disabled={walletConnected || busy}
+              rows="4"
+            />
+          </div>
+        </div>
+      )}
       <div className="mnemonic-actions">
         {showSave && (
           <>
